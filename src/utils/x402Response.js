@@ -6,9 +6,9 @@ export function buildX402Response() {
     accepts: [
   {
     scheme: 'exact',
-    network: 'Base Mainnet',
+    network: 'base', // ✅ правильне enum значення
     maxAmountRequired: '2000000',
-    resource: 'default',
+    resource: 'https://x402bpunk-base.vercel.app/api/x402/resource/default', // ✅ має бути валідний URL
     description: 'x402bpunk on Base: pay 2 USDC and get access. Integrated with PayAI facilitator.',
     mimeType: 'application/json',
     payTo: receiver,
