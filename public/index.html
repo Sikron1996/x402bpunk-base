@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>x402bpunk (Base)</title>
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+  <style>
+    body {
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    button {
+      background: white;
+      color: black;
+      border: none;
+      padding: 20px 40px;
+      font-size: 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #444;
+      color: white;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <button onclick="payUSDC()">💵 Pay 2 USD (USDC, Base)</button>
+  <script>
+    async function payUSDC() {
+      if (!window.ethereum) return alert('Install MetaMask first!');
+      const web3 = new Web3(window.ethereum);
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const receiver = "0xF97a410f2f0b64Cb5820baD63d878c3A967235AA";
+      const usdcAddress = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"; // USDC on Base
+      const usdcAbi = [{
+        "constant": false,
+        "inputs": [
+          { "name": "_to", "type": "address" },
+          { "name": "_value", "type": "uint256" }
+        ],
+        "name": "transfer",
+        "outputs": [{ "name": "", "type": "bool" }],
+        "type": "function"
+      }];
+      const contract = new web3.eth.Contract(usdcAbi, usdcAddress);
+      const accounts = await web3.eth.getAccounts();
+      const from = accounts[0];
+      const amount = "2000000"; // 2 USDC (6 decimals)
+      try {
+        const tx = await contract.methods.transfer(receiver, amount).send({ from });
+        alert('✅ Payment sent!\nTxHash: ' + tx.transactionHash);
+        await fetch('/api/x402/pay', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ txHash: tx.transactionHash, resource: 'default' })
+        });
+      } catch (err) {
+        alert('❌ Error: ' + err.message);
+      }
+    }
+  </script>
+</body>
+</html>
