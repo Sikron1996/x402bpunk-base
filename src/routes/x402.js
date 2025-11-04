@@ -6,7 +6,8 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   const resp = buildX402Response();
-  res.json(resp);
+  // x402 protocol requires HTTP 402 (Payment Required)
+  res.status(402).json(resp);
 });
 
 router.post('/pay', async (req, res) => {
