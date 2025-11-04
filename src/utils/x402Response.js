@@ -8,7 +8,7 @@ export function buildX402Response() {
         scheme: "exact",
         network: "base", // ✅ must match enum
         maxAmountRequired: "2000000", // 2 USDC (6 decimals)
-        resource: "https://x402bpunk-base.vercel.app/api/x402/resource/default", // ✅ must be URL
+        resource: "https://x402bpunk-base.vercel.app/api/x402/resource", // ✅ must be URL
         description: "Access x402bpunk Base resource — pay 2 USDC via PayAI facilitator.",
         mimeType: "application/json",
         payTo: receiver,
