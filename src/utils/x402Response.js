@@ -6,10 +6,32 @@ export function buildX402Response() {
     accepts: [
       {
         scheme: "exact",
-        network: "base", // ✅ must match enum
-        maxAmountRequired: "2000000", // 2 USDC (6 decimals)
-        resource: "https://x402bpunk-base.vercel.app/api/x402/resource", // ✅ must be URL
-        description: "Access x402bpunk Base resource — pay 2 USDC via PayAI facilitator.",
+        network: "base",
+        maxAmountRequired: "3000000", // 3 USDC
+        resource: "https://x402bpunk-base.vercel.app/api/x402punks",
+        description: "Mint 1 x402 Punk",
+        mimeType: "application/json",
+        payTo: receiver,
+        maxTimeoutSeconds: 300,
+        asset: "USDC"
+      },
+      {
+        scheme: "exact",
+        network: "base",
+        maxAmountRequired: "3000000",
+        resource: "https://x402bpunk-base.vercel.app/api/x402punkAura",
+        description: "Mint 1 x402 Punk Aura",
+        mimeType: "application/json",
+        payTo: receiver,
+        maxTimeoutSeconds: 300,
+        asset: "USDC"
+      },
+      {
+        scheme: "exact",
+        network: "base",
+        maxAmountRequired: "10000", // <0.01 USD
+        resource: "https://x402bpunk-base.vercel.app/api/totalMinted",
+        description: "x402punks Total Mint Count",
         mimeType: "application/json",
         payTo: receiver,
         maxTimeoutSeconds: 300,
