@@ -7,8 +7,8 @@ export function buildX402Response() {
       {
         scheme: "exact",
         network: "base",
-        maxAmountRequired: "3000000", // 3 USDC
-        resource: "https://x402bpunk-base.vercel.app/api/x402punks",
+        maxAmountRequired: "3000000",
+        resource: "https://x402bpunk-base.vercel.app/api/mint",
         description: "Mint 1 x402 Punk",
         mimeType: "application/json",
         payTo: receiver,
@@ -19,7 +19,7 @@ export function buildX402Response() {
         scheme: "exact",
         network: "base",
         maxAmountRequired: "3000000",
-        resource: "https://x402bpunk-base.vercel.app/api/x402punkAura",
+        resource: "https://x402bpunk-base.vercel.app/api/aura",
         description: "Mint 1 x402 Punk Aura",
         mimeType: "application/json",
         payTo: receiver,
@@ -29,7 +29,7 @@ export function buildX402Response() {
       {
         scheme: "exact",
         network: "base",
-        maxAmountRequired: "10000", // <0.01 USD
+        maxAmountRequired: "10000",
         resource: "https://x402bpunk-base.vercel.app/api/totalMinted",
         description: "x402punks Total Mint Count",
         mimeType: "application/json",
